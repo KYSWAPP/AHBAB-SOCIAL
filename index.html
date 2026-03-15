@@ -528,6 +528,12 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:none;out
         <div class="ni-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
         <span class="ni-lb">Collecte</span>
       </div>
+      <div class="ni" id="nav-settings" onclick="showPage('settings',this)">
+        <div class="ni-ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </div>
+        <span class="ni-lb">Parametres</span>
+      </div>
       <div class="ni" id="nav-profile" onclick="showPage('profile',this)">
         <div class="ni-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
         <span class="ni-lb">Profil</span>
@@ -870,7 +876,7 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:none;out
       <div class="pacts">
         <div class="ib"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
         <div class="ib"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
-        <button class="ebtn">Modifier le profil</button>
+        <button class="ebtn" onclick="openEditProfile()">Modifier le profil</button><button class="ebtn" onclick="showPage('settings',document.getElementById('nav-settings'))" style="margin-left:6px">Parametres</button>
       </div>
       <div class="pbio">
         <div class="pname" id="prof-name">Chargement...</div>
@@ -918,6 +924,126 @@ input,textarea{font-family:inherit;color:inherit;background:none;border:none;out
         <div style="background:var(--bg3);border-radius:8px;padding:8px;text-align:center"><div style="font-size:17px;font-weight:800;color:var(--blue)">12</div><div style="font-size:9px;color:var(--text2)">Ouvertes</div></div>
       </div>
       <div id="mosque-list"></div>
+    </div>
+
+
+    <!-- SETTINGS -->
+    <div id="page-settings" style="display:none">
+      <div class="ph">
+        <button class="bbtn" onclick="showPage('profile',document.getElementById('nav-profile'))">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        </button>
+        <h2>Parametres</h2>
+      </div>
+
+      <!-- Sections -->
+      <div style="padding:14px 16px;border-bottom:1px solid var(--border)">
+        <div style="font-size:11px;color:var(--text2);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Compte</div>
+
+        <!-- Edit Profile -->
+        <div onclick="openEditProfile()" style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);cursor:pointer">
+          <div style="width:38px;height:38px;border-radius:10px;background:var(--gl);display:flex;align-items:center;justify-content:center">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" width="18" height="18"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div style="flex:1"><div style="font-size:14px;font-weight:600">Modifier le profil</div><div style="font-size:11px;color:var(--text2)">Photo, nom, bio, localisation</div></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+
+        <!-- Change Password -->
+        <div onclick="openChangePassword()" style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);cursor:pointer">
+          <div style="width:38px;height:38px;border-radius:10px;background:var(--gdbg);display:flex;align-items:center;justify-content:center">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" width="18" height="18"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <div style="flex:1"><div style="font-size:14px;font-weight:600">Changer le mot de passe</div><div style="font-size:11px;color:var(--text2)">Securiser votre compte</div></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+
+        <!-- Email -->
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)">
+          <div style="width:38px;height:38px;border-radius:10px;background:rgba(29,155,240,.15);display:flex;align-items:center;justify-content:center">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div style="flex:1"><div style="font-size:14px;font-weight:600">Email</div><div style="font-size:11px;color:var(--text2)" id="settings-email">...</div></div>
+          <span style="font-size:11px;color:var(--green);background:var(--gl);padding:2px 8px;border-radius:99px">Verifie</span>
+        </div>
+      </div>
+
+      <!-- Confidentialite -->
+      <div style="padding:14px 16px;border-bottom:1px solid var(--border)">
+        <div style="font-size:11px;color:var(--text2);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Confidentialite</div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border)">
+          <div style="display:flex;align-items:center;gap:12px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            <div><div style="font-size:13px;font-weight:600">Compte prive</div><div style="font-size:11px;color:var(--text2)">Seuls vos Ahbab voient vos Hababs</div></div>
+          </div>
+          <label style="position:relative;display:inline-block;width:44px;height:24px">
+            <input type="checkbox" id="toggle-private" onchange="togglePrivacy(this)" style="opacity:0;width:0;height:0">
+            <span onclick="document.getElementById('toggle-private').click()" style="position:absolute;cursor:pointer;inset:0;background:var(--border2);border-radius:24px;transition:.3s" id="toggle-private-bg"></span>
+            <span id="toggle-private-dot" style="position:absolute;content:'';height:18px;width:18px;left:3px;bottom:3px;background:white;border-radius:50%;transition:.3s"></span>
+          </label>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border)">
+          <div style="display:flex;align-items:center;gap:12px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <div><div style="font-size:13px;font-weight:600">Notifications</div><div style="font-size:11px;color:var(--text2)">Likes, commentaires, Ahbab</div></div>
+          </div>
+          <label style="position:relative;display:inline-block;width:44px;height:24px">
+            <input type="checkbox" id="toggle-notif" checked onchange="toggleNotif(this)" style="opacity:0;width:0;height:0">
+            <span onclick="document.getElementById('toggle-notif').click()" style="position:absolute;cursor:pointer;inset:0;background:var(--green);border-radius:24px;transition:.3s" id="toggle-notif-bg"></span>
+            <span id="toggle-notif-dot" style="position:absolute;height:18px;width:18px;left:23px;bottom:3px;background:white;border-radius:50%;transition:.3s"></span>
+          </label>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0">
+          <div style="display:flex;align-items:center;gap:12px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <div><div style="font-size:13px;font-weight:600">Messages directs</div><div style="font-size:11px;color:var(--text2)">Qui peut vous envoyer un Salam</div></div>
+          </div>
+          <select onchange="setMsgPrivacy(this.value)" style="background:var(--bg3);color:var(--text);border:1px solid var(--border2);border-radius:8px;padding:5px 9px;font-size:11px;cursor:pointer">
+            <option value="all">Tous</option>
+            <option value="ahbab">Ahbab seulement</option>
+            <option value="none">Personne</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Apparence -->
+      <div style="padding:14px 16px;border-bottom:1px solid var(--border)">
+        <div style="font-size:11px;color:var(--text2);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Apparence</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0">
+          <div style="display:flex;align-items:center;gap:12px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            <div><div style="font-size:13px;font-weight:600">Theme</div><div style="font-size:11px;color:var(--text2)">Mode sombre active</div></div>
+          </div>
+          <div style="display:flex;gap:6px">
+            <button onclick="setTheme('dark',this)" style="padding:5px 12px;border-radius:8px;background:var(--green);color:#fff;border:none;font-size:11px;cursor:pointer;font-family:DM Sans,sans-serif" class="theme-btn">Sombre</button>
+            <button onclick="setTheme('light',this)" style="padding:5px 12px;border-radius:8px;background:var(--bg3);color:var(--text);border:1px solid var(--border2);font-size:11px;cursor:pointer;font-family:DM Sans,sans-serif" class="theme-btn">Clair</button>
+          </div>
+        </div>
+        <div style="padding:12px 0;border-top:1px solid var(--border)">
+          <div style="font-size:13px;font-weight:600;margin-bottom:10px">Langue</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button onclick="setLang('fr',this)" class="lang-btn" style="padding:6px 14px;border-radius:8px;background:var(--green);color:#fff;border:none;font-size:12px;cursor:pointer;font-family:DM Sans,sans-serif">Francais</button>
+            <button onclick="setLang('ar',this)" class="lang-btn" style="padding:6px 14px;border-radius:8px;background:var(--bg3);color:var(--text);border:1px solid var(--border2);font-size:12px;cursor:pointer;font-family:DM Sans,sans-serif">العربية</button>
+            <button onclick="setLang('en',this)" class="lang-btn" style="padding:6px 14px;border-radius:8px;background:var(--bg3);color:var(--text);border:1px solid var(--border2);font-size:12px;cursor:pointer;font-family:DM Sans,sans-serif">English</button>
+            <button onclick="setLang('wo',this)" class="lang-btn" style="padding:6px 14px;border-radius:8px;background:var(--bg3);color:var(--text);border:1px solid var(--border2);font-size:12px;cursor:pointer;font-family:DM Sans,sans-serif">Wolof</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Danger zone -->
+      <div style="padding:14px 16px">
+        <div style="font-size:11px;color:var(--red);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Zone dangereuse</div>
+        <button onclick="confirmLogout()" style="width:100%;padding:11px;border-radius:10px;background:transparent;color:var(--red);border:1px solid var(--red);font-size:13px;font-weight:600;cursor:pointer;font-family:DM Sans,sans-serif;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:8px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Se deconnecter
+        </button>
+        <button onclick="confirmDelete()" style="width:100%;padding:11px;border-radius:10px;background:rgba(244,33,46,.1);color:var(--red);border:1px solid rgba(244,33,46,.3);font-size:13px;font-weight:600;cursor:pointer;font-family:DM Sans,sans-serif">
+          Supprimer mon compte
+        </button>
+      </div>
     </div>
 
   </main>
@@ -1232,6 +1358,11 @@ function updateProfileUI() {
 
 // ── SHOW APP ──
 function showApp() {
+  // Set settings email
+  if (currentUser) {
+    var el = document.getElementById('settings-email');
+    if (el) el.textContent = currentUser.email || '';
+  }
   document.getElementById('auth').style.display = 'none';
   document.getElementById('app').style.display = 'flex';
   renderFeed(); renderTrends(); renderNotifs(); renderConvs();
@@ -1754,7 +1885,7 @@ function openCompose(){document.getElementById('compose-modal').style.display='f
 function closeCompose(){document.getElementById('compose-modal').style.display='none';}
 
 // ── NAV ──
-const pages=['home','explore','salat','notif','msg','bm','collecte','profile','mosquee'];
+const pages=['home','explore','salat','notif','msg','bm','collecte','profile','mosquee','settings'];
 function showPage(page,navEl){
   pages.forEach(p=>{const el=document.getElementById('page-'+p);if(el)el.style.display='none';});
   const el=document.getElementById('page-'+page);if(el)el.style.display='block';
@@ -1904,8 +2035,267 @@ function locateMe() {
   }
 }
 
+
+// ── SETTINGS ──
+function openSettings() {
+  if (currentUser) {
+    document.getElementById('settings-email').textContent = currentUser.email || '';
+  }
+  showPage('settings', document.getElementById('nav-settings'));
+}
+
+// Edit Profile
+function openEditProfile() {
+  if (currentProfile) {
+    document.getElementById('edit-name').value = currentProfile.full_name || '';
+    document.getElementById('edit-username').value = currentProfile.username || '';
+    document.getElementById('edit-bio').value = currentProfile.bio || '';
+    document.getElementById('edit-location').value = currentProfile.location || '';
+  }
+  // Set preview avatar
+  var prevImg = document.getElementById('prof-av');
+  var editPrev = document.getElementById('edit-av-preview');
+  if (prevImg && editPrev) editPrev.src = prevImg.src;
+  document.getElementById('edit-profile-modal').style.display = 'flex';
+}
+function closeEditProfile() {
+  document.getElementById('edit-profile-modal').style.display = 'none';
+}
+
+function previewAvatar(input) {
+  var file = input.files[0];
+  if (!file) return;
+  if (file.size > 5 * 1024 * 1024) { toast('Photo trop grande ! Max 5MB'); return; }
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    document.getElementById('edit-av-preview').src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+async function saveProfile() {
+  var name = document.getElementById('edit-name').value.trim();
+  var username = document.getElementById('edit-username').value.trim().toLowerCase().replace(/[^a-z0-9_]/g, '');
+  var bio = document.getElementById('edit-bio').value.trim();
+  var location = document.getElementById('edit-location').value.trim();
+  if (!name) { toast('Le nom est obligatoire'); return; }
+
+  // Upload avatar if changed
+  var avatarFile = document.getElementById('avatar-upload').files[0];
+  var avatarUrl = currentProfile ? currentProfile.avatar_url : null;
+
+  if (avatarFile && currentUser) {
+    var ext = avatarFile.name.split('.').pop();
+    var path = 'avatars/' + currentUser.id + '.' + ext;
+    var result = await sb.storage.from('ahbab-media').upload(path, avatarFile, { upsert: true, contentType: avatarFile.type });
+    if (!result.error) {
+      var urlResult = sb.storage.from('ahbab-media').getPublicUrl(path);
+      avatarUrl = urlResult.data.publicUrl;
+    }
+  }
+
+  // Update Supabase profile
+  var updates = { id: currentUser.id, full_name: name, username: username, bio: bio, location: location };
+  if (avatarUrl) updates.avatar_url = avatarUrl;
+
+  var updateResult = await sb.from('profiles').upsert(updates);
+
+  if (updateResult.error) {
+    toast('Erreur : ' + updateResult.error.message);
+    return;
+  }
+
+  // Update local state
+  currentProfile = Object.assign(currentProfile || {}, updates);
+
+  // Update UI
+  document.getElementById('sp-n').textContent = name;
+  document.getElementById('sp-h').textContent = '@' + username;
+  document.getElementById('prof-name').textContent = name;
+  document.getElementById('prof-hdl').textContent = '@' + username;
+  document.getElementById('prof-n').textContent = name;
+  if (bio) document.getElementById('prof-desc').textContent = bio;
+
+  // Update avatar everywhere if uploaded
+  if (avatarUrl) {
+    var imgs = ['prof-av', 'sp-img', 'c-av', 'm-av'];
+    imgs.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.src = avatarUrl;
+    });
+  }
+
+  closeEditProfile();
+  toast('Profil mis a jour ! ✓');
+}
+
+// Change Password
+function openChangePassword() {
+  document.getElementById('change-pwd-modal').style.display = 'flex';
+  document.getElementById('new-pwd').value = '';
+  document.getElementById('confirm-pwd').value = '';
+  document.getElementById('pwd-err').style.display = 'none';
+}
+
+async function changePassword() {
+  var newPwd = document.getElementById('new-pwd').value;
+  var confirmPwd = document.getElementById('confirm-pwd').value;
+  var errEl = document.getElementById('pwd-err');
+  errEl.style.display = 'none';
+  if (!newPwd || newPwd.length < 6) { errEl.textContent = 'Minimum 6 caracteres'; errEl.style.display = 'block'; return; }
+  if (newPwd !== confirmPwd) { errEl.textContent = 'Les mots de passe ne correspondent pas'; errEl.style.display = 'block'; return; }
+  var result = await sb.auth.updateUser({ password: newPwd });
+  if (result.error) { errEl.textContent = result.error.message; errEl.style.display = 'block'; return; }
+  document.getElementById('change-pwd-modal').style.display = 'none';
+  toast('Mot de passe change avec succes !');
+}
+
+// Privacy toggles
+function togglePrivacy(checkbox) {
+  var bg = document.getElementById('toggle-private-bg');
+  var dot = document.getElementById('toggle-private-dot');
+  if (checkbox.checked) {
+    bg.style.background = 'var(--green)';
+    dot.style.left = '23px';
+    toast('Compte prive active');
+  } else {
+    bg.style.background = 'var(--border2)';
+    dot.style.left = '3px';
+    toast('Compte public active');
+  }
+}
+
+function toggleNotif(checkbox) {
+  var bg = document.getElementById('toggle-notif-bg');
+  var dot = document.getElementById('toggle-notif-dot');
+  if (checkbox.checked) {
+    bg.style.background = 'var(--green)';
+    dot.style.left = '23px';
+  } else {
+    bg.style.background = 'var(--border2)';
+    dot.style.left = '3px';
+    toast('Notifications desactivees');
+  }
+}
+
+function setMsgPrivacy(val) {
+  var labels = { all: 'Tout le monde peut vous ecrire', ahbab: 'Seulement vos Ahbab', none: 'Messages desactives' };
+  toast(labels[val] || '');
+}
+
+function setTheme(theme, btn) {
+  document.querySelectorAll('.theme-btn').forEach(function(b) {
+    b.style.background = 'var(--bg3)';
+    b.style.color = 'var(--text)';
+    b.style.border = '1px solid var(--border2)';
+  });
+  btn.style.background = 'var(--green)';
+  btn.style.color = '#fff';
+  btn.style.border = 'none';
+  toast('Theme ' + theme + ' active !');
+}
+
+function setLang(lang, btn) {
+  document.querySelectorAll('.lang-btn').forEach(function(b) {
+    b.style.background = 'var(--bg3)';
+    b.style.color = 'var(--text)';
+    b.style.border = '1px solid var(--border2)';
+  });
+  btn.style.background = 'var(--green)';
+  btn.style.color = '#fff';
+  btn.style.border = 'none';
+  var langs = { fr: 'Francais', ar: 'Arabe', en: 'Anglais', wo: 'Wolof' };
+  toast('Langue : ' + (langs[lang] || lang));
+}
+
+function confirmLogout() {
+  if (confirm('Voulez-vous vous deconnecter ?')) { logout(); }
+}
+
+function confirmDelete() {
+  if (confirm('Supprimer votre compte ? Cette action est irreversible !')) {
+    toast('Contactez le support pour supprimer votre compte');
+  }
+}
+
 // ── START ──
 init();
 </script>
+
+<!-- EDIT PROFILE MODAL -->
+<div class="mo" id="edit-profile-modal" style="display:none" onclick="if(event.target===this)closeEditProfile()">
+  <div class="modal" style="max-width:500px">
+    <div class="mhdr">
+      <button class="mcls" onclick="closeEditProfile()">&#10005;</button>
+      <span class="mtitle">Modifier le profil</span>
+      <button onclick="saveProfile()" style="margin-left:auto;background:var(--green);color:#fff;border:none;border-radius:var(--r);padding:6px 16px;font-size:13px;font-weight:700;cursor:pointer;font-family:DM Sans,sans-serif">Sauvegarder</button>
+    </div>
+    <div style="padding:20px">
+      <!-- Photo upload -->
+      <div style="text-align:center;margin-bottom:20px">
+        <div style="position:relative;display:inline-block">
+          <img id="edit-av-preview" src="" style="width:88px;height:88px;border-radius:50%;object-fit:cover;border:3px solid var(--green)"/>
+          <label style="position:absolute;bottom:0;right:0;width:30px;height:30px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;cursor:pointer;border:2px solid var(--bg)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" width="14" height="14"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <input type="file" accept="image/*" id="avatar-upload" onchange="previewAvatar(this)" style="display:none"/>
+          </label>
+        </div>
+        <div style="font-size:11px;color:var(--text2);margin-top:8px">Cliquez sur la photo pour changer</div>
+      </div>
+      <!-- Fields -->
+      <div style="margin-bottom:14px">
+        <label style="font-size:11px;color:var(--text2);font-weight:600;display:block;margin-bottom:5px">NOM COMPLET</label>
+        <input id="edit-name" type="text" placeholder="Votre nom complet" style="width:100%;padding:10px 13px;border:1px solid var(--border2);border-radius:9px;background:var(--bg3);font-size:14px;color:var(--text);font-family:DM Sans,sans-serif"/>
+      </div>
+      <div style="margin-bottom:14px">
+        <label style="font-size:11px;color:var(--text2);font-weight:600;display:block;margin-bottom:5px">NOM D'UTILISATEUR</label>
+        <div style="position:relative">
+          <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text2);font-size:14px">@</span>
+          <input id="edit-username" type="text" placeholder="nom_utilisateur" style="width:100%;padding:10px 13px 10px 26px;border:1px solid var(--border2);border-radius:9px;background:var(--bg3);font-size:14px;color:var(--text);font-family:DM Sans,sans-serif"/>
+        </div>
+      </div>
+      <div style="margin-bottom:14px">
+        <label style="font-size:11px;color:var(--text2);font-weight:600;display:block;margin-bottom:5px">BIO</label>
+        <textarea id="edit-bio" placeholder="Parlez de vous..." maxlength="160" style="width:100%;padding:10px 13px;border:1px solid var(--border2);border-radius:9px;background:var(--bg3);font-size:14px;color:var(--text);font-family:DM Sans,sans-serif;resize:none;height:80px"></textarea>
+        <div style="font-size:10px;color:var(--text2);text-align:right">160 caracteres max</div>
+      </div>
+      <div style="margin-bottom:14px">
+        <label style="font-size:11px;color:var(--text2);font-weight:600;display:block;margin-bottom:5px">LOCALISATION</label>
+        <input id="edit-location" type="text" placeholder="Ex: Dakar, Senegal" style="width:100%;padding:10px 13px;border:1px solid var(--border2);border-radius:9px;background:var(--bg3);font-size:14px;color:var(--text);font-family:DM Sans,sans-serif"/>
+      </div>
+      <div style="margin-bottom:0">
+        <label style="font-size:11px;color:var(--text2);font-weight:600;display:block;margin-bottom:5px">SITE WEB</label>
+        <input id="edit-website" type="url" placeholder="https://..." style="width:100%;padding:10px 13px;border:1px solid var(--border2);border-radius:9px;background:var(--bg3);font-size:14px;color:var(--text);font-family:DM Sans,sans-serif"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CHANGE PASSWORD MODAL -->
+<div class="mo" id="change-pwd-modal" style="display:none" onclick="if(event.target===this)document.getElementById('change-pwd-modal').style.display='none'">
+  <div class="modal" style="max-width:420px">
+    <div class="mhdr">
+      <button class="mcls" onclick="document.getElementById('change-pwd-modal').style.display='none'">&#10005;</button>
+      <span class="mtitle">Changer le mot de passe</span>
+    </div>
+    <div style="padding:20px">
+      <div style="background:rgba(26,138,58,.08);border:1px solid rgba(26,138,58,.2);border-radius:10px;padding:12px;margin-bottom:16px;font-size:12px;color:var(--text2);line-height:1.6">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" width="14" height="14" style="display:inline;vertical-align:middle;margin-right:5px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Un email de reinitialisation sera envoye a votre adresse
+      </div>
+      <div style="margin-bottom:14px">
+        <label style="font-size:11px;color:var(--text2);font-weight:600;display:block;margin-bottom:5px">NOUVEAU MOT DE PASSE</label>
+        <input id="new-pwd" type="password" placeholder="Minimum 6 caracteres" style="width:100%;padding:10px 13px;border:1px solid var(--border2);border-radius:9px;background:var(--bg3);font-size:14px;color:var(--text);font-family:DM Sans,sans-serif"/>
+      </div>
+      <div style="margin-bottom:20px">
+        <label style="font-size:11px;color:var(--text2);font-weight:600;display:block;margin-bottom:5px">CONFIRMER LE MOT DE PASSE</label>
+        <input id="confirm-pwd" type="password" placeholder="Repetez le mot de passe" style="width:100%;padding:10px 13px;border:1px solid var(--border2);border-radius:9px;background:var(--bg3);font-size:14px;color:var(--text);font-family:DM Sans,sans-serif"/>
+      </div>
+      <div id="pwd-err" style="color:var(--red);font-size:12px;text-align:center;margin-bottom:12px;display:none"></div>
+      <button onclick="changePassword()" style="width:100%;padding:11px;background:var(--green);color:#fff;border:none;border-radius:var(--r);font-size:14px;font-weight:700;cursor:pointer;font-family:DM Sans,sans-serif">Changer le mot de passe</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
